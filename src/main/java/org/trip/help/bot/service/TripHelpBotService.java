@@ -1,6 +1,8 @@
 package org.trip.help.bot.service;
 
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.trip.help.bot.handler.ButtonHandler;
 import org.trip.help.bot.handler.DefaultMessageHandler;
 import org.trip.help.bot.handler.HelpMessageHandler;
 import org.trip.help.bot.handler.TelegramMessageHandler;
@@ -11,6 +13,7 @@ import java.util.UUID;
 public class TripHelpBotService {
 
     private static final String HELP_MESSAGE = "/help";
+    private static final String BUTTON_MESSAGE = "/button";
 
     private TripRepository tripRepository;
 
@@ -18,16 +21,19 @@ public class TripHelpBotService {
         this.tripRepository = tripRepository;
     }
 
-    public void processMessage(Update message) {
+    public SendMessage processMessage(Update message) {
         String text = message.getMessage().getText();
         System.out.println("Process message: " + message.getUpdateId() + " : " + text);
         TelegramMessageHandler handler = getHandler(text);
-        handler.handleMessage(message);
+        return handler.handleMessage(message);
+
     }
 
     private TelegramMessageHandler getHandler(String message) {
         if (message.startsWith(HELP_MESSAGE)) {
             return new HelpMessageHandler();
+        } else if (message.startsWith(BUTTON_MESSAGE)) {
+            return new ButtonHandler();
         } else {
             return new DefaultMessageHandler();
         }

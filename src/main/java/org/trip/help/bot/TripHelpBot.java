@@ -2,6 +2,7 @@ package org.trip.help.bot;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -31,7 +32,13 @@ public class TripHelpBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         System.out.println("OnUpdateReceived: " + update.getUpdateId());
-        tripHelpBotService.processMessage(update);
+        SendMessage result = tripHelpBotService.processMessage(update);
+        try {
+            execute(result);
+        } catch (TelegramApiException e) {
+            System.out.println("TelegramApiException: " + e.getClass().getName() + " : " + e.getMessage());
+        }
+
     }
 
     @Override
