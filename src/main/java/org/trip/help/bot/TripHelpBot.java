@@ -32,7 +32,7 @@ public class TripHelpBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         System.out.println("OnUpdateReceived: " + update.getUpdateId());
-        SendMessage result = tripHelpBotService.processMessage(update);
+        SendMessage result = tripHelpBotService.processUpdatedMessage(update);
         try {
             execute(result);
         } catch (TelegramApiException e) {

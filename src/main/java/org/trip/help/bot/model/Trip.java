@@ -1,10 +1,15 @@
 package org.trip.help.bot.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Trip {
 
     private String id;
     private String user;
-    private String route;
+    private String startPoint;
+    private List<String> additionalPoints = new ArrayList<>();
+    private String endPoint;
     private String date;
     private Boolean isTripActive;
     private String tripDescription;
@@ -25,12 +30,28 @@ public class Trip {
         this.user = user;
     }
 
-    public String getRoute() {
-        return route;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setRoute(String route) {
-        this.route = route;
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
+    }
+
+    public List<String> getAdditionalPoints() {
+        return additionalPoints;
+    }
+
+    public void setAdditionalPoints(List<String> additionalPoints) {
+        this.additionalPoints = additionalPoints;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String endPoint) {
+        this.endPoint = endPoint;
     }
 
     public String getDate() {
