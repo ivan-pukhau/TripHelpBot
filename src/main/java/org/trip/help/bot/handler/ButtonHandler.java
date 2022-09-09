@@ -25,17 +25,12 @@ public class ButtonHandler implements TelegramMessageHandler {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         List<InlineKeyboardButton> buttons = new ArrayList<>();
         InlineKeyboardButton addTripButton= new InlineKeyboardButton("Add my trip");
-        addTripButton.setCallbackData(Action.ADD_TRIP.toString() + UUID.randomUUID() + "Vitebsk Minsk Lodz");
-        addTripButton.setText("ffffffffffff");
+        addTripButton.setCallbackData(Action.ADD_TRIP.toString());
         buttons.add(addTripButton);
 
         InlineKeyboardButton testButton = new InlineKeyboardButton("Find trip");
         testButton.setCallbackData("test_callback");
         buttons.add(testButton);
-
-        MenuButtonCommands buttonCommands = MenuButtonCommands.builder()
-                .build();
-
 
         keyboard.add(buttons);
         inlineKeyboardMarkup.setKeyboard(keyboard);

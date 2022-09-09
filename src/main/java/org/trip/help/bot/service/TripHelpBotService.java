@@ -2,7 +2,6 @@ package org.trip.help.bot.service;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.trip.help.bot.action.Action;
 import org.trip.help.bot.handler.AddTripHandler;
 import org.trip.help.bot.handler.ButtonHandler;
 import org.trip.help.bot.handler.DefaultMessageHandler;
@@ -16,6 +15,7 @@ public class TripHelpBotService {
 
     private static final String HELP_COMMAND = "/help";
     private static final String BUTTON_COMMAND = "/button";
+    private static final String ADD_TRIP_COMMAND = "/add_trip";
 
     private static final String ADD_TRIP_BUTTON_CALLBACK = "add_trip_button";
 
@@ -59,6 +59,8 @@ public class TripHelpBotService {
             return new HelpMessageHandler();
         } else if (message.startsWith(BUTTON_COMMAND)) {
             return new ButtonHandler();
+        } else if (message.startsWith(ADD_TRIP_COMMAND)) {
+            return new AddTripHandler(tripRepository);
         } else {
             return new DefaultMessageHandler();
         }
@@ -70,7 +72,7 @@ public class TripHelpBotService {
 
         }
         */
-        return new AddTripHandler();
+        return new AddTripHandler(tripRepository);
     }
 
     private String addTrip(Update message) {

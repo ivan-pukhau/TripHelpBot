@@ -51,9 +51,10 @@ public class TripHelpBot extends TelegramLongPollingBot {
         try {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             telegramBotsApi.registerBot(this);
+
             System.out.println("TelegramAPI started. Look for messages");
         } catch (TelegramApiException e) {
-            System.out.println("Cant Connect. Pause : " + e.getMessage());
+            System.out.println("Can't Connect. Pause : " + e.getMessage());
         }
     }
 }
